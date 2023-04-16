@@ -1,5 +1,31 @@
-html, body {
-    border: 0px;
-    margin: 0px;
-    padding: 0px;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+:root {
+	/* Colors */
+	--color-accent:         #609FFF;
+	--color-accent-inverse: #FFFFFF;
+	--color-basic-text:     #000000;
+	--color-grey-light:     #DDDDDD;
+	--color-grey-medium:    #A9A9A9;
+
+	--font-poppins: 'Poppins', sans-serif;
+	font-family: var(--font-poppins);
+}
+
+html, body, form, input {
+	border: 0px;
+	margin: 0px;
+	padding: 0px;
+
+	font-family: var(--font-poppins);
+}
+
+.global-text-input {
+	border: 1px solid var(--color-grey-medium);
+}
+
+.global-button-accent {
+	border: 0px;
+	background-color: var(--color-accent);
+	color: var(--color-accent-inverse);
 }

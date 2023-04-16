@@ -1,0 +1,19 @@
+@import url(./global.css);
+
+#content {
+	display: flex;
+}
+
+#title {
+	font-weight: 600;
+}
+
+#login-form {
+	display: flex;
+	flex-direction: column;
+}
+
+#login-form input {
+	height: 60px;
+}
+
