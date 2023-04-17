@@ -14,6 +14,12 @@
 }
 
 #login-form input {
+	width: 320px;
 	height: 60px;
+	margin-bottom: 12px;
 }
 
+#register-link {
+	padding-top: 10px;
+	text-align: center;
+}

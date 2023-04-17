@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
 :root {
 	/* Colors */
@@ -18,10 +18,30 @@ html, body, form, input {
 	padding: 0px;
 
 	font-family: var(--font-poppins);
+
+}
+
+a {
+	color: var(--color-accent);
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+.global-h4 {
+	font-weight: 300;
+	font-size: 20px;	
 }
 
 .global-text-input {
-	border: 1px solid var(--color-grey-medium);
+	border: 1px solid var(--color-grey-light);
+	padding: 20px;
+}
+
+.global-text-input::placeholder {
+	color: var(--color-grey-medium);
 }
 
 .global-button-accent {
