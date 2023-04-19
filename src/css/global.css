@@ -45,6 +45,11 @@ a:hover {
 	padding: 20px;
 }
 
+.global-text-input:focus {
+	outline: none;
+	border: 1px solid var(--color-accent);
+}
+
 .global-text-input::placeholder {
 	color: var(--color-grey-medium);
 }

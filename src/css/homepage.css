@@ -2,6 +2,8 @@
 
 #content {
 	display: flex;
+	justify-content: space-evenly;
+	padding-top: 200px;
 }
 
 #title {
@@ -12,6 +14,7 @@
 }
 
 #login-form {
+	padding-top: 50px;
 	display: flex;
 	flex-direction: column;
 }
