@@ -13,7 +13,7 @@
 	font-family: var(--font-poppins);
 }
 
-html, body, form, input {
+html, body, form, input, select {
 	border: 0px;
 	margin: 0px;
 	padding: 0px;
@@ -63,8 +63,17 @@ a:hover {
 	font-size: 14px;
 }
 
+.global-description-text {
+	font-weight: 300;
+	font-size: 12px;
+}
+
 .global-grey-text {
 	color: var(--color-grey-medium);
+}
+
+.global-light-grey-text {
+	color: var(--color-grey-light);
 }
 
 .global-text-input {
@@ -115,6 +124,37 @@ a.global-icon-button {
 	gap: 7px;
 }
 
-a.global-icon-button img {
+a.global-icon-button>img {
 	height: 16px;
+}
+
+a.global-small-icon-button {
+	padding-left: 7px;
+	padding-right: 7px;
+}
+
+a.global-small-icon-button>img {
+	height: 16px;
+}
+
+select {
+	appearance: none;
+	display: flex;
+	justify-content: space-around;
+	width: 85px;
+	height: 30px;
+	border-radius: 0px;
+	padding-left: 15px;
+	border: 1px solid var(--color-grey-light);
+	background-color: var(--color-grey-light);
+
+	background-image: url(../images/dropdown_arrow.svg);
+	background-repeat: no-repeat;
+	background-position: 75% 50%;
+	background-size: auto 9px;
+}
+
+select:focus {
+	outline: none;
+	border: 1px solid var(--color-accent-focus);
 }

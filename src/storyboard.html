@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+    <head>
+        <title>Storyboard Shower</title>
+
+        <link href="css/storyboard.css" rel="stylesheet" />
+    </head>
+
+    <body>
+        <div id="main-layout">
+            <div id="menu">
+                <div id="title">
+                    storyboard<br/>shower
+                </div>
+                <div id="user-bar">
+                    <div id="user-image">
+                        <img src="images/user.jpg"/>
+                    </div>
+                    <div id="user-name" class="global-regular-text-accent">
+                        John Doe
+                    </div>
+                </div>
+                <div id="menu-list">
+                    <div><a href="">Storyboards</a></div>
+                    <div><a href="">Public profile</a></div>
+                    <div><a href="">Settings</a></div>
+                    <div><a href="">Logout</a></div>
+                </div>
+            </div>
+            <div id="content">
+                <div id="header">
+                    <a href="./storyboards.html" class="global-grey-text">
+                        &lt; Storyboards
+                    </a>
+                    <div class="global-h2">
+                        Another yet amazing storyboard
+                    </div>
+                </div>
+                <div id="double-panel">
+                    <div id="versions-panel">
+                        <div id="versions-header">
+                            <div class="global-h3">Versions</div>
+                            <div class="global-grey-text">
+                                1/10
+                            </div>
+                            <div id="info-button" class="global-description-text global-grey-text">
+                                ?
+                            </div>
+                        </div>
+                        <div id="main-version-selector" class="option-block">
+                            <div class="option-upper-bar">
+                                <div>
+                                    <div class="global-regular-text-accent">
+                                        Main version
+                                    </div>
+                                    <div class="global-description-text">
+                                        The version the public will see
+                                    </div>
+                                </div>
+                                <div>
+                                    <select 
+                                        class="global-dropdown" 
+                                        id="main-version-dropdown"
+                                    >
+                                        <option id="V1">V1</option>
+                                        <option id="V2">V2</option>
+                                        <option id="V3">V3</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="versions-list">
+                            <div class="new-version">
+                                <img src="images/placeholder_grey.png" />
+                                <div class="global-h3 global-light-grey-text">V3</div>
+                                <div class="spacer"></div>
+                                <a class="global-button-accent global-small-icon-button" title="Add a new version">
+                                    <img src="images/plus.png">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="options-panel">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
