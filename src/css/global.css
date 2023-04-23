@@ -3,6 +3,7 @@
 :root {
 	/* Colors */
 	--color-accent:         #609FFF;
+	--color-accent-focus:   #4d85d8;
 	--color-accent-inverse: #FFFFFF;
 	--color-basic-text:     #000000;
 	--color-grey-light:     #DDDDDD;
@@ -18,7 +19,12 @@ html, body, form, input {
 	padding: 0px;
 
 	font-family: var(--font-poppins);
+	font-weight: 300;
+	font-size: 14px;
+}
 
+body {
+	background-color: white;
 }
 
 a {
@@ -30,14 +36,35 @@ a:hover {
 	text-decoration: underline;
 }
 
+#title {
+	font-weight: 600;
+	line-height: 0.9;
+	cursor: default;
+	user-select: none;
+}
+
+.global-h2 {
+	font-weight: 300;
+	font-size: 32px;
+}
+
 .global-h3 {
 	font-weight: 300;
-	font-size: 24px;	
+	font-size: 24px;
 }
 
 .global-h4 {
 	font-weight: 300;
 	font-size: 20px;	
+}
+
+.global-regular-text-accent {
+	font-weight: 500;
+	font-size: 14px;
+}
+
+.global-grey-text {
+	color: var(--color-grey-medium);
 }
 
 .global-text-input {
@@ -58,4 +85,36 @@ a:hover {
 	border: 0px;
 	background-color: var(--color-accent);
 	color: var(--color-accent-inverse);
+	cursor: pointer;
+}
+
+.global-button-accent:hover {
+	background-color: var(--color-accent-focus);
+}
+
+.global-button-accent:focus {
+	outline: none;
+	border: 1px solid var(--color-accent-focus);
+}
+
+a.global-button-accent {
+	display: flex;
+	height: 30px;
+	padding-left: 20px;
+	padding-right: 20px;
+	max-height: 30px;
+	align-items: center;
+}
+
+a.global-button-accent:hover {
+	text-decoration: none;
+}
+
+a.global-icon-button {
+	padding-left: 17px;
+	gap: 7px;
+}
+
+a.global-icon-button img {
+	height: 16px;
 }

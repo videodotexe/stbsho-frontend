@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+    <head>
+        <title>Storyboard Shower</title>
+
+        <link href="css/storyboards.css" rel="stylesheet" />
+    </head>
+
+    <body>
+        <div id="main-layout">
+            <div id="menu">
+                <div id="title">
+                    storyboard<br/>shower
+                </div>
+                <div id="user-bar">
+                    <div id="user-image">
+                        <img src="images/user.jpg"/>
+                    </div>
+                    <div id="user-name" class="global-regular-text-accent">
+                        John Doe
+                    </div>
+                </div>
+                <div id="menu-list">
+                    <div><a href="">Storyboards</a></div>
+                    <div><a href="">Public profile</a></div>
+                    <div><a href="">Settings</a></div>
+                    <div><a href="">Logout</a></div>
+                </div>
+            </div>
+            <div id="content">
+                <div id="header">
+                    <div class="global-h2">Storyboards</div>
+                    <a class="global-button-accent global-icon-button">
+                        <img src="images/plus.png">
+                        Upload
+                    </a>
+                </div>
+                <div id="storyboard-grid">
+                    
+                </div>
+            </div>
+        </div>
+
+        <script>
+            const gridElem = document.getElementById("storyboard-grid");
+            [
+                "The amazing storyboard",
+                "Another yet amazing storyboard",
+                "Super duper storyboard",
+                "Not so cool storyboard",
+                "The amazing storyboard",
+                "Another yet amazing storyboard",
+                "Super duper storyboard",
+                "Not so cool storyboard",
+                "The amazing storyboard",
+                "Another yet amazing storyboard",
+                "Super duper storyboard",
+                "Not so cool storyboard",
+                "The amazing storyboard",
+                "Another yet amazing storyboard",
+                "Super duper storyboard",
+                "Not so cool storyboard",
+            ].forEach(title => {
+                const stbElem = document.createElement("div");
+                stbElem.innerHTML = `
+                    <div class="storyboard-placeholder">
+                        <img src="images/placeholder.png" />
+                    </div>
+                    <div class="storyboard-description">
+                        <div class="global-h4">
+                            ${title}
+                        </div>
+                        <div class="global-grey-text">
+                            4 versions
+                        </div>
+                    </div>
+                `;
+                gridElem.appendChild(stbElem);
+            });
+        </script>
+    </body>
+</html>

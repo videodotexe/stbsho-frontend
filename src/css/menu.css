@@ -1,0 +1,31 @@
+#menu #title {
+    font-size: 32px;
+}
+
+#user-bar {
+    margin-top: 30px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+#user-image {
+    width: 25px;
+    height: 25px;
+}
+
+#user-image img {
+    width: 25px;
+    height: 25px;
+}
+
+#menu-list {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+#menu-list a {
+    color: black;
+}
