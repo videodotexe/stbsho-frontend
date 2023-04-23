@@ -27,6 +27,11 @@
 
 #storyboard-grid>div {
     width: var(--element-width);
+    cursor: pointer;
+}
+
+#storyboard-grid>div:hover>.storyboard-description>.global-h4 {
+    text-decoration: underline;
 }
 
 #storyboard-grid>div>.storyboard-placeholder>img {
