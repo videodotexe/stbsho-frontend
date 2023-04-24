@@ -86,4 +86,8 @@
     background-size: 15px 1px, 15px 1px, 1px 15px, 1px 15px;
 }
 
+.middle-version {
+    height: 59px;
+    border-bottom: 1px solid var(--color-grey-light);
+}
 

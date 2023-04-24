@@ -90,33 +90,44 @@ a:hover {
 	color: var(--color-grey-medium);
 }
 
-.global-button-accent {
-	border: 0px;
-	background-color: var(--color-accent);
-	color: var(--color-accent-inverse);
+.global-button {
+	border: 1px solid var(--color-grey-light);
+	background-color: var(--color-grey-light);
+	color: var(--color-basic-text);
 	cursor: pointer;
 }
 
-.global-button-accent:hover {
-	background-color: var(--color-accent-focus);
+.global-button:hover {
+	background-color: var(--color-grey-medium);
+	border-color: var(--color-grey-medium);
 }
 
-.global-button-accent:focus {
+.global-button:focus {
 	outline: none;
 	border: 1px solid var(--color-accent-focus);
 }
 
-a.global-button-accent {
+a.global-button {
 	display: flex;
-	height: 30px;
+	height: 28px;
 	padding-left: 20px;
 	padding-right: 20px;
-	max-height: 30px;
 	align-items: center;
 }
 
-a.global-button-accent:hover {
+a.global-button:hover {
 	text-decoration: none;
+}
+
+.global-button-accent {
+	background-color: var(--color-accent);
+	color: var(--color-accent-inverse);
+	border-color: var(--color-accent);
+}
+
+.global-button-accent:hover {
+	background-color: var(--color-accent-focus);
+	border-color: var(--color-accent-focus);
 }
 
 a.global-icon-button {
@@ -125,16 +136,16 @@ a.global-icon-button {
 }
 
 a.global-icon-button>img {
-	height: 16px;
+	height: 18px;
 }
 
 a.global-small-icon-button {
-	padding-left: 7px;
-	padding-right: 7px;
+	padding-left: 5px;
+	padding-right: 5px;
 }
 
 a.global-small-icon-button>img {
-	height: 16px;
+	height: 18px;
 }
 
 select {
