@@ -159,32 +159,39 @@ a.global-small-icon-button>img {
 	width: 40px;
 	height: 20px;
 	background-color: var(--color-accent);
+	background-image: url(../images/toggle/check.svg), url(../images/toggle/cross.svg);
+	background-repeat: no-repeat, no-repeat;
+	background-position: 20% 50%, 80% 50%;
 	padding: 2px;
-	display: flex;
 	cursor: pointer;
-}
 
-.global-toggle div {
-	flex-grow: 1;
-}
-
-.global-toggle div:first-child {
-	background-image: url(../images/toggle/check.svg);
-	background-repeat: no-repeat;
-	background-position: 50%;
-}
-
-.global-toggle div:last-child {
-	background-color: white;
+	transition: background-color 100ms;
 }
 
 .global-toggle:hover {
-	flex-direction: row-reverse;
+	background-color: var(--color-accent-focus);
+}
+
+.global-toggle>div {
+	background-color: var(--color-accent-inverse);
+	width: 20px;
+	height: 20px;
+	position: relative;
+	left: 20px;
+
+	transition: left 100ms;
+}
+
+.global-toggle-off {
 	background-color: var(--color-grey-light);
 }
 
-.global-toggle:hover div:first-child {
-	background-image: url(../images/toggle/cross.svg);
+.global-toggle-off:hover {
+	background-color: var(--color-grey-medium);
+}
+
+.global-toggle-off>div {
+	left: 0px;
 }
 
 select {
