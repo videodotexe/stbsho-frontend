@@ -155,6 +155,38 @@ a.global-small-icon-button>img {
 	height: 18px;
 }
 
+.global-toggle {
+	width: 40px;
+	height: 20px;
+	background-color: var(--color-accent);
+	padding: 2px;
+	display: flex;
+	cursor: pointer;
+}
+
+.global-toggle div {
+	flex-grow: 1;
+}
+
+.global-toggle div:first-child {
+	background-image: url(../images/toggle/check.svg);
+	background-repeat: no-repeat;
+	background-position: 50%;
+}
+
+.global-toggle div:last-child {
+	background-color: white;
+}
+
+.global-toggle:hover {
+	flex-direction: row-reverse;
+	background-color: var(--color-grey-light);
+}
+
+.global-toggle:hover div:first-child {
+	background-image: url(../images/toggle/cross.svg);
+}
+
 select {
 	appearance: none;
 	display: flex;
