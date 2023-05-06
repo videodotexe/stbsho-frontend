@@ -10,6 +10,8 @@
 	--color-grey-light:     #DDDDDD;
 	--color-grey-medium:    #A9A9A9;
 
+	--time-unit: 100ms;
+
 	--font-poppins: 'Poppins', sans-serif;
 	font-family: var(--font-poppins);
 }
@@ -86,11 +88,13 @@ a:hover {
 .global-text-input {
 	border: 1px solid var(--color-grey-light);
 	padding: 5px;
+
+	transition: border-color var(--time-unit);
 }
 
 .global-text-input:focus {
 	outline: none;
-	border: 1px solid var(--color-accent);
+	border-color: var(--color-accent);
 }
 
 .global-text-input::placeholder {
@@ -102,6 +106,8 @@ a:hover {
 	background-color: var(--color-grey-light);
 	color: var(--color-basic-text);
 	cursor: pointer;
+
+	transition: background-color var(--time-unit), border-color var(--time-unit);
 }
 
 .global-button:hover {
@@ -165,7 +171,7 @@ a.global-small-icon-button>img {
 	padding: 2px;
 	cursor: pointer;
 
-	transition: background-color 100ms;
+	transition: background-color var(--time-unit);
 }
 
 .global-toggle:hover {
@@ -179,7 +185,7 @@ a.global-small-icon-button>img {
 	position: relative;
 	left: 20px;
 
-	transition: left 100ms;
+	transition: left var(--time-unit);
 }
 
 .global-toggle-off {
