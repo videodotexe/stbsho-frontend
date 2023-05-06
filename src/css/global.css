@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@300;400&display=swap');
 
 :root {
 	/* Colors */
@@ -68,6 +69,12 @@ a:hover {
 	font-size: 12px;
 }
 
+.global-mono-text {
+	font-family: 'Red Hat Mono', monospace;
+	font-size: 12px;
+	font-weight: 300;
+}
+
 .global-grey-text {
 	color: var(--color-grey-medium);
 }
@@ -78,7 +85,7 @@ a:hover {
 
 .global-text-input {
 	border: 1px solid var(--color-grey-light);
-	padding: 20px;
+	padding: 5px;
 }
 
 .global-text-input:focus {
