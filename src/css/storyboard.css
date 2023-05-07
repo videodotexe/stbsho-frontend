@@ -37,20 +37,11 @@ textarea {
     padding-bottom: 5px;
 }
 
-/* Versions header */
 #versions-header>.global-h3 {
     flex-grow: 1;
 }
 
-#options-panel {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    width: 430px;
-}
-
-#info-button {
+#versions-info-button {
     width: 12px;
     height: 12px;
     border: 1px solid var(--color-grey-medium);
@@ -59,6 +50,40 @@ textarea {
     align-items: center;
     justify-content: center;
     cursor: help;
+    position: relative;
+}
+
+#versions-info-button:before {
+    content: attr(data-text); /* here's the magic */
+    position: absolute;
+    
+    top: 100%;
+    left: 0px;
+    transform: translateX(-50%);
+    margin-top: 10px; /* and add a small left margin */
+    
+    /* basic styles */
+    width: 260px;
+    padding: 10px;
+    background: #000;
+    color: #fff;
+    text-align: center;
+    
+    /* hide by default */
+    display: none;
+}
+
+#versions-info-button:hover:before {
+    animation: opacity-fade-in var(--medium-time);
+    display: block;
+}
+
+#options-panel {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 430px;
 }
 
 /* All options (the main versions selector too) are option blocks */

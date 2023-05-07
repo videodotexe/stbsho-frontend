@@ -7,10 +7,12 @@
 	--color-accent-focus:   #4d85d8;
 	--color-accent-inverse: #FFFFFF;
 	--color-basic-text:     #000000;
+	--color-basic-inverse:  #FFFFFF;
 	--color-grey-light:     #DDDDDD;
 	--color-grey-medium:    #A9A9A9;
 
 	--time-unit: 100ms;
+	--medium-time: calc(5*var(--time-unit));
 
 	--font-poppins: 'Poppins', sans-serif;
 	font-family: var(--font-poppins);
@@ -221,4 +223,23 @@ select {
 select:focus {
 	outline: none;
 	border: 1px solid var(--color-accent-focus);
+}
+
+
+/* Animations */
+@keyframes opacity-fade-in {
+    0% {
+        display: none;
+        opacity: 0;
+    }
+
+    1% {
+        display: block;
+        opacity: 0;
+    }
+
+    100% {
+        display: block;
+        opacity: 1;
+    }
 }
