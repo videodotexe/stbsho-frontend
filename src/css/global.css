@@ -1,19 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@300;400&display=swap');
 
 :root {
 	/* Colors */
-	--color-accent:         #609FFF;
-	--color-accent-focus:   #4d85d8;
-	--color-accent-inverse: #FFFFFF;
-	--color-basic-text:     #000000;
-	--color-grey-light:     #DDDDDD;
-	--color-grey-medium:    #A9A9A9;
+	--color-accent:          #609FFF;
+	--color-accent-focus:    #4d85d8;
+	--color-accent-inverse:  #FFFFFF;
+	--color-basic-text:      #000000;
+	--color-basic-inverse:   #FFFFFF;
+	--color-grey-light:      #DDDDDD;
+	--color-grey-dark-light: #c7c7c7;
+	--color-grey-medium:     #A9A9A9;
+
+	--time-unit: 100ms;
+	--medium-time: calc(5*var(--time-unit));
 
 	--font-poppins: 'Poppins', sans-serif;
 	font-family: var(--font-poppins);
 }
 
-html, body, form, input {
+html, body, form, input, select {
 	border: 0px;
 	margin: 0px;
 	padding: 0px;
@@ -63,51 +69,81 @@ a:hover {
 	font-size: 14px;
 }
 
+.global-description-text {
+	font-weight: 300;
+	font-size: 12px;
+}
+
+.global-mono-text {
+	font-family: 'Red Hat Mono', monospace;
+	font-size: 12px;
+	font-weight: 300;
+}
+
 .global-grey-text {
 	color: var(--color-grey-medium);
 }
 
+.global-light-grey-text {
+	color: var(--color-grey-light);
+}
+
 .global-text-input {
 	border: 1px solid var(--color-grey-light);
-	padding: 20px;
+	padding: 5px;
+
+	transition: border-color var(--time-unit);
 }
 
 .global-text-input:focus {
 	outline: none;
-	border: 1px solid var(--color-accent);
+	border-color: var(--color-accent);
 }
 
 .global-text-input::placeholder {
 	color: var(--color-grey-medium);
 }
 
-.global-button-accent {
-	border: 0px;
-	background-color: var(--color-accent);
-	color: var(--color-accent-inverse);
+.global-button {
+	border: 1px solid var(--color-grey-light);
+	background-color: var(--color-grey-light);
+	color: var(--color-basic-text);
 	cursor: pointer;
+
+	transition: background-color var(--time-unit), border-color var(--time-unit);
 }
 
-.global-button-accent:hover {
-	background-color: var(--color-accent-focus);
+.global-button:hover {
+	background-color: var(--color-grey-dark-light);
+	border-color: var(--color-grey-dark-light);
 }
 
-.global-button-accent:focus {
+.global-button:focus {
 	outline: none;
 	border: 1px solid var(--color-accent-focus);
 }
 
-a.global-button-accent {
+a.global-button {
 	display: flex;
-	height: 30px;
+	height: 28px;
 	padding-left: 20px;
 	padding-right: 20px;
-	max-height: 30px;
 	align-items: center;
 }
 
-a.global-button-accent:hover {
+a.global-button:hover {
 	text-decoration: none;
+}
+
+.global-button-accent {
+	background-color: var(--color-accent);
+	color: var(--color-accent-inverse);
+	border-color: var(--color-accent);
+}
+
+.global-button-accent:hover {
+	background-color: var(--color-accent-focus);
+	border-color: var(--color-accent-focus);
 }
 
 a.global-icon-button {
@@ -115,6 +151,96 @@ a.global-icon-button {
 	gap: 7px;
 }
 
-a.global-icon-button img {
-	height: 16px;
+a.global-icon-button>img {
+	height: 18px;
+}
+
+a.global-small-icon-button {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+a.global-small-icon-button>img {
+	height: 18px;
+}
+
+.global-toggle {
+	width: 40px;
+	height: 20px;
+	background-color: var(--color-accent);
+	background-image: url(../images/toggle/check.svg), url(../images/toggle/cross.svg);
+	background-repeat: no-repeat, no-repeat;
+	background-position: 20% 50%, 80% 50%;
+	padding: 2px;
+	cursor: pointer;
+
+	transition: background-color var(--time-unit);
+}
+
+.global-toggle:hover {
+	background-color: var(--color-accent-focus);
+}
+
+.global-toggle>div {
+	background-color: var(--color-accent-inverse);
+	width: 20px;
+	height: 20px;
+	position: relative;
+	left: 20px;
+
+	transition: left var(--time-unit);
+}
+
+.global-toggle-off {
+	background-color: var(--color-grey-light);
+}
+
+.global-toggle-off:hover {
+	background-color: var(--color-grey-dark-light);
+}
+
+.global-toggle-off>div {
+	left: 0px;
+}
+
+select {
+	appearance: none;
+	display: flex;
+	justify-content: space-around;
+	width: 85px;
+	height: 30px;
+	border-radius: 0px;
+	padding-left: 15px;
+	border: 1px solid var(--color-grey-light);
+	background-color: var(--color-grey-light);
+	cursor: pointer;
+
+	background-image: url(../images/dropdown_arrow.svg);
+	background-repeat: no-repeat;
+	background-position: 75% 50%;
+	background-size: auto 9px;
+}
+
+select:focus {
+	outline: none;
+	border: 1px solid var(--color-accent-focus);
+}
+
+
+/* Animations */
+@keyframes opacity-fade-in {
+    0% {
+        display: none;
+        opacity: 0;
+    }
+
+    1% {
+        display: block;
+        opacity: 0;
+    }
+
+    100% {
+        display: block;
+        opacity: 1;
+    }
 }

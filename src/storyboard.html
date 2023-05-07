@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+    <head>
+        <title>Storyboard Shower</title>
+
+        <link href="css/storyboard.css" rel="stylesheet" />
+    </head>
+
+    <body>
+        <div id="main-layout">
+            <div id="menu">
+                <div id="title">
+                    storyboard<br/>shower
+                </div>
+                <div id="user-bar">
+                    <div id="user-image">
+                        <img src="images/user.jpg"/>
+                    </div>
+                    <div id="user-name" class="global-regular-text-accent">
+                        John Doe
+                    </div>
+                </div>
+                <div id="menu-list">
+                    <div><a href="">Storyboards</a></div>
+                    <div><a href="">Public profile</a></div>
+                    <div><a href="">Settings</a></div>
+                    <div><a href="">Logout</a></div>
+                </div>
+            </div>
+            <div id="content">
+                <div id="header">
+                    <a href="./storyboards.html" class="global-grey-text">
+                        &lt; Storyboards
+                    </a>
+                    <div class="global-h2">
+                        Another yet amazing storyboard
+                    </div>
+                </div>
+                <div id="double-panel">
+                    <div id="versions-panel">
+                        <div id="versions-header">
+                            <div class="global-h3">Versions</div>
+                            <div class="global-grey-text">
+                                1/10
+                            </div>
+                            <div 
+                                data-text="A storyboard can have at maximum ten versions. If you need to upload an eleventh one please remove an older version." 
+                                id="versions-info-button" class="global-description-text global-grey-text"
+                            >
+                                ?
+                            </div>
+                        </div>
+                        <div id="main-version-selector" class="option-block">
+                            <div class="option-upper-bar">
+                                <div>
+                                    <div class="global-regular-text-accent">
+                                        Main version
+                                    </div>
+                                    <div class="global-description-text">
+                                        The version the public will see
+                                    </div>
+                                </div>
+                                <div>
+                                    <select id="main-version-dropdown">
+                                        <option id="V1">V1</option>
+                                        <option id="V2">V2</option>
+                                        <option id="V3">V3</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="versions-list">
+                            <div class="new-version">
+                                <img src="images/placeholder_grey.png" />
+                                <div class="global-h3 global-light-grey-text">V3</div>
+                                <div class="spacer"></div>
+                                <a class="global-button global-button-accent global-small-icon-button" title="Add a new version">
+                                    <img src="images/button_icons/plus.png">
+                                </a>
+                            </div>
+                            <div class="middle-version">
+                                <img src="images/placeholder.png" />
+                                <div class="global-h3 ">V2</div>
+                                <div class="spacer"></div>
+                                <div class="global-description-text">48 sheets, 26 Mar 2023</div>
+                                <a class="global-button global-small-icon-button" title="Delete version">
+                                    <img src="images/button_icons/trashbin.svg">
+                                </a>
+                            </div>
+                            <div>
+                                <img src="images/placeholder.png" />
+                                <div class="global-h3 ">V1</div>
+                                <div class="spacer"></div>
+                                <div class="global-description-text">48 sheets, 26 Mar 2023</div>
+                                <a class="global-button global-small-icon-button" title="Delete version">
+                                    <img src="images/button_icons/trashbin.svg">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ################################ -->
+
+                    <div id="options-panel">
+                        <div class="option-block">
+                            <div class="option-upper-bar">
+                                <div>
+                                    <div class="global-regular-text-accent">
+                                        Public
+                                    </div>
+                                    <div class="global-description-text">
+                                        Make the storyboard accessible to others
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="global-toggle">
+                                        <div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="option-block">
+                            <div class="option-upper-bar">
+                                <div>
+                                    <div class="global-regular-text-accent">
+                                        Link
+                                    </div>
+                                    <div class="global-description-text">
+                                        Give this link to anyone
+                                    </div>
+                                </div>
+                                <div>
+                                    <a class="global-button global-small-icon-button" title="Copy link">
+                                        <img src="images/button_icons/copy.svg">
+                                    </a>
+                                </div>
+                            </div>
+                            <input 
+                                type="text" readonly="1"
+                                class="global-text-input global-mono-text global-grey-text" 
+                                value="https://d1bxsdz0n811yu.cloudfront.net/widget.html?stb=3bb85020-3dd6-4430-964b-f8705bcb6813"
+                            />
+                        </div>
+
+                        <div class="option-block">
+                            <div class="option-upper-bar">
+                                <div>
+                                    <div class="global-regular-text-accent">
+                                        Embed
+                                    </div>
+                                    <div class="global-description-text">
+                                        Paste this in your webpage
+                                    </div>
+                                </div>
+                                <div>
+                                    <a class="global-button global-small-icon-button" title="Copy code">
+                                        <img src="images/button_icons/copy.svg">
+                                    </a>
+                                </div>
+                            </div>
+                            <textarea rows="3" readonly="1" class="global-text-input global-mono-text global-grey-text">
+&lt;iframe src=”https://d1bxsdz0n811yu.cloudfront.net/widget.html?stb=3bb85020-3dd6-4430-964b-f8705bcb6813” style="border: 0px; width: 800px; height: 450px;"&gt;&lt;/iframe&gt;
+                            </textarea>
+                        </div>
+
+                        <div class="option-block">
+                            <div class="option-upper-bar">
+                                <div>
+                                    <div class="global-regular-text-accent">
+                                        Description
+                                    </div>
+                                    <div class="global-description-text">
+                                        A short text to describe the board
+                                    </div>
+                                </div>
+                                <div>
+                                    <a class="global-button global-small-icon-button" title="Edit description">
+                                        <img src="images/button_icons/edit.svg">
+                                    </a>
+                                </div>
+                            </div>
+                            <textarea rows="3" readonly="1" class="global-text-input global-grey-text">
+Molestiae a maxime quia mollitia. Sapiente ut dolorem ut. Aut optio quisquam qui dolor qui ut aperiam. Dicta rerum et sapiente officiis voluptas sed. Harum sunt reiciendis optio ea adipisci praesentium mollitia est. Eveniet facilis minima culpa in id provident accusamus.
+Laborum harum repellat nulla et assumenda reprehenderit esse asperiores. Cupiditate sed numquam ipsum soluta tempora. Ex quis quia voluptate sed. Eum iusto ipsam animi repellendus laboriosam. Accusantium corporis cumque quasi.
+                            </textarea>
+                        </div>
+
+                        <div class="option-block">
+                            <div class="option-upper-bar">
+                                <div>
+                                    <div class="global-regular-text-accent">
+                                        Rename
+                                    </div>
+                                    <div class="global-description-text">
+                                        Change the title of this stroyboard
+                                    </div>
+                                </div>
+                                <div>
+                                    <a class="global-button global-small-icon-button" title="Rename storyboard">
+                                        <img src="images/button_icons/edit.svg">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="option-block">
+                            <div class="option-upper-bar">
+                                <div>
+                                    <div class="global-regular-text-accent">
+                                        Delete
+                                    </div>
+                                    <div class="global-description-text">
+                                        Delete this storyboard and all of its versions
+                                    </div>
+                                </div>
+                                <div>
+                                    <a class="global-button global-small-icon-button" title="Delete storyboard">
+                                        <img src="images/button_icons/trashbin.svg">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

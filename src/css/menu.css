@@ -1,3 +1,12 @@
+#main-layout {
+    display: flex;
+
+    padding-left: 160px;
+    padding-right: 160px;
+    padding-top: 70px;
+    gap: 210px;
+}
+
 #menu #title {
     font-size: 32px;
 }
