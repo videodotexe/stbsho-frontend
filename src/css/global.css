@@ -3,13 +3,14 @@
 
 :root {
 	/* Colors */
-	--color-accent:         #609FFF;
-	--color-accent-focus:   #4d85d8;
-	--color-accent-inverse: #FFFFFF;
-	--color-basic-text:     #000000;
-	--color-basic-inverse:  #FFFFFF;
-	--color-grey-light:     #DDDDDD;
-	--color-grey-medium:    #A9A9A9;
+	--color-accent:          #609FFF;
+	--color-accent-focus:    #4d85d8;
+	--color-accent-inverse:  #FFFFFF;
+	--color-basic-text:      #000000;
+	--color-basic-inverse:   #FFFFFF;
+	--color-grey-light:      #DDDDDD;
+	--color-grey-dark-light: #c7c7c7;
+	--color-grey-medium:     #A9A9A9;
 
 	--time-unit: 100ms;
 	--medium-time: calc(5*var(--time-unit));
@@ -113,8 +114,8 @@ a:hover {
 }
 
 .global-button:hover {
-	background-color: var(--color-grey-medium);
-	border-color: var(--color-grey-medium);
+	background-color: var(--color-grey-dark-light);
+	border-color: var(--color-grey-dark-light);
 }
 
 .global-button:focus {
@@ -195,7 +196,7 @@ a.global-small-icon-button>img {
 }
 
 .global-toggle-off:hover {
-	background-color: var(--color-grey-medium);
+	background-color: var(--color-grey-dark-light);
 }
 
 .global-toggle-off>div {
