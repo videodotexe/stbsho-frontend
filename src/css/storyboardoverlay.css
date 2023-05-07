@@ -1,0 +1,61 @@
+@import url(./global.css);
+
+.storyboard-overlay {
+    display: flex;
+}
+
+.storyboard-overlay>div {
+    height: 80vh;
+}
+
+.storyboard-overlay>.overlay-right {
+    width: 107vh;
+    background-color: black;
+}
+
+.storyboard-overlay>.overlay-left {
+    background-color: white;
+    max-width: 450px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.storyboard-overlay>.overlay-left>div {
+    padding: 20px;
+}
+
+#options-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: scroll;
+
+    padding-top: 0px;
+}
+
+.storyboard-overlay>.overlay-left>div>.header {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+/* All options (the main versions selector too) are option blocks */
+.option-block {
+    border: 1px solid var(--color-grey-light);
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.option-upper-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.option-detail {
+    border: 1px solid var(--color-grey-light);
+    padding: 5px;
+}
