@@ -28,7 +28,7 @@ html, body, form, input, select {
 
 	font-family: var(--font-poppins);
 	font-weight: 300;
-	font-size: 14px;
+	font-size: 0.95rem;
 }
 
 body {
