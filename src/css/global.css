@@ -22,9 +22,9 @@
 }
 
 html, body, form, input, select {
-	border: 0px;
-	margin: 0px;
-	padding: 0px;
+	border: 0rem;
+	margin: 0rem;
+	padding: 0rem;
 
 	font-family: var(--font-poppins);
 	font-weight: 300;
@@ -57,32 +57,32 @@ a:hover {
 
 .global-h2 {
 	font-weight: 300;
-	font-size: 32px;
+	font-size: 2.1rem;
 }
 
 .global-h3 {
 	font-weight: 300;
-	font-size: 24px;
+	font-size: 1.6rem;
 }
 
 .global-h4 {
 	font-weight: 300;
-	font-size: 20px;	
+	font-size: 1.3rem;	
 }
 
 .global-regular-text-accent {
 	font-weight: 500;
-	font-size: 14px;
+	font-size: 0.95rem;
 }
 
 .global-description-text {
 	font-weight: 300;
-	font-size: 12px;
+	font-size: 0.8rem;
 }
 
 .global-mono-text {
 	font-family: 'Red Hat Mono', monospace;
-	font-size: 12px;
+	font-size: 0.8rem;
 	font-weight: 300;
 }
 
@@ -95,10 +95,14 @@ a:hover {
 }
 
 .global-text-input {
-	border: 1px solid var(--color-grey-light);
-	padding: 5px;
+	border: 0.1rem solid var(--color-grey-light);
+	padding: 0.4rem;
 
 	transition: border-color var(--time-unit);
+}
+
+div.global-text-input {
+	overflow-wrap: break-word;
 }
 
 .global-text-input:focus {
@@ -111,7 +115,7 @@ a:hover {
 }
 
 .global-button {
-	border: 1px solid var(--color-grey-light);
+	border: 0.1rem solid var(--color-grey-light);
 	background-color: var(--color-grey-light);
 	color: var(--color-basic-text);
 	cursor: pointer;
@@ -126,14 +130,14 @@ a:hover {
 
 .global-button:focus {
 	outline: none;
-	border: 1px solid var(--color-accent-focus);
+	border: 0.1rem solid var(--color-accent-focus);
 }
 
 a.global-button {
 	display: flex;
-	height: 28px;
-	padding-left: 20px;
-	padding-right: 20px;
+	height: 1.9rem;
+	padding-left: 1.4rem;
+	padding-right: 1.4rem;
 	align-items: center;
 }
 
@@ -153,21 +157,21 @@ a.global-button:hover {
 }
 
 a.global-icon-button {
-	padding-left: 17px;
-	gap: 7px;
+	padding-left: 1.25rem;
+	gap: .5rem;
 }
 
 a.global-icon-button>img {
-	height: 18px;
+	height: 1.2rem;
 }
 
 a.global-small-icon-button {
-	padding-left: 5px;
-	padding-right: 5px;
+	height: unset;
+	padding: 0.3rem;
 }
 
 a.global-small-icon-button>img {
-	height: 18px;
+	height: 1.2rem;
 }
 
 .global-clear-button {
@@ -181,13 +185,12 @@ a.global-small-icon-button>img {
 }
 
 .global-toggle {
-	width: 40px;
-	height: 20px;
+	width: 2.6rem;
 	background-color: var(--color-accent);
 	background-image: url(../images/toggle/check.svg), url(../images/toggle/cross.svg);
 	background-repeat: no-repeat, no-repeat;
 	background-position: 20% 50%, 80% 50%;
-	padding: 2px;
+	padding: 0.14rem;
 	cursor: pointer;
 
 	transition: background-color var(--time-unit);
@@ -199,10 +202,10 @@ a.global-small-icon-button>img {
 
 .global-toggle>div {
 	background-color: var(--color-accent-inverse);
-	width: 20px;
-	height: 20px;
+	width: 1.3rem;
+	height: 1.3rem;
 	position: relative;
-	left: 20px;
+	left: 1.3rem;
 
 	transition: left var(--time-unit);
 }
@@ -216,9 +219,10 @@ a.global-small-icon-button>img {
 }
 
 .global-toggle-off>div {
-	left: 0px;
+	left: 0rem;
 }
 
+/* This is not currently used
 select {
 	appearance: none;
 	display: flex;
@@ -227,7 +231,7 @@ select {
 	height: 30px;
 	border-radius: 0px;
 	padding-left: 15px;
-	border: 1px solid var(--color-grey-light);
+	border: 0.1rem solid var(--color-grey-light);
 	background-color: var(--color-grey-light);
 	cursor: pointer;
 
@@ -239,15 +243,15 @@ select {
 
 select:focus {
 	outline: none;
-	border: 1px solid var(--color-accent-focus);
-}
+	border: 0.1rem solid var(--color-accent-focus);
+} */
 
 .global-overlay {
 	position: absolute;
 	width: 100%;
 	height: 100%;
-	top: 0px;
-	left: 0px;
+	top: rem;
+	left: rem;
 	background-color: rgba(0, 0, 0, 0.5);
 
 	display: flex;
