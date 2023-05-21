@@ -190,7 +190,7 @@ a.global-small-icon-button>img {
 	background-image: url(../images/toggle/check.svg), url(../images/toggle/cross.svg);
 	background-repeat: no-repeat, no-repeat;
 	background-position: 20% 50%, 80% 50%;
-	padding: 0.14rem;
+	padding: 0.13rem;
 	cursor: pointer;
 
 	transition: background-color var(--time-unit);
