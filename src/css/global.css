@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Red+Hat+Mono:wght@300;400&display=swap');
 
+@import url(./storyboardoverlay.css);
+
 :root {
 	/* Colors */
 	--color-accent:          #609FFF;
@@ -31,6 +33,10 @@ html, body, form, input, select {
 
 body {
 	background-color: white;
+}
+
+.global-no-scroll {
+	overflow: hidden;
 }
 
 a {
@@ -164,6 +170,16 @@ a.global-small-icon-button>img {
 	height: 18px;
 }
 
+.global-clear-button {
+	background-color: transparent;
+	border-color: transparent;
+}
+
+.global-clear-button:hover {
+	background-color: var(--color-grey-light);
+	border-color: var(--color-grey-light);
+}
+
 .global-toggle {
 	width: 40px;
 	height: 20px;
@@ -226,6 +242,18 @@ select:focus {
 	border: 1px solid var(--color-accent-focus);
 }
 
+.global-overlay {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0px;
+	left: 0px;
+	background-color: rgba(0, 0, 0, 0.5);
+
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
 
 /* Animations */
 @keyframes opacity-fade-in {
