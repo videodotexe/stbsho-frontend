@@ -7,23 +7,25 @@
 
     <body>
         <div id="main-layout">
-            <div id="menu">
-                <div id="title">
-                    storyboard<br/>shower
-                </div>
-                <div id="user-bar">
-                    <div id="user-image">
-                        <img src="images/user.jpg"/>
+            <div>
+                <div id="menu">
+                    <div id="title">
+                        storyboard<br/>shower
                     </div>
-                    <div id="user-name" class="global-regular-text-accent">
-                        John Doe
+                    <div id="user-bar">
+                        <div id="user-image">
+                            <img src="images/user.jpg"/>
+                        </div>
+                        <div id="user-name" class="global-regular-text-accent">
+                            John Doe
+                        </div>
                     </div>
-                </div>
-                <div id="menu-list">
-                    <div><a href="">Storyboards</a></div>
-                    <div><a href="">Public profile</a></div>
-                    <div><a href="">Settings</a></div>
-                    <div><a href="">Logout</a></div>
+                    <div id="menu-list">
+                        <div><a href="">Storyboards</a></div>
+                        <div><a href="">Public profile</a></div>
+                        <div><a href="">Settings</a></div>
+                        <div><a href="">Logout</a></div>
+                    </div>
                 </div>
             </div>
             <div id="content">
@@ -81,10 +83,10 @@
             function showStbOverlay() {
                 const stbOverlayTemplate = `
                     <div class="storyboard-overlay">
-                        <div class="overlay-right">
+                        <div class="overlay-left">
 
                         </div>
-                        <div class="overlay-left">
+                        <div class="overlay-right">
                             <div>
                                 <div class="header">
                                     <div class="global-h4">

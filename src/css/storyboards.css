@@ -4,16 +4,16 @@
 #header {
     display: flex;
     align-items: center;
-    gap: 25px;
+    gap: 2rem;
 }
 
 #storyboard-grid {
     display: flex;
     flex-wrap: wrap;
-    gap: 38px;
+    gap: 3.3rem;
 
-    padding-top: 70px;
-    --element-width: 290px;
+    padding-top: 5rem;
+    --element-width: 20rem;
 }
 
 #storyboard-grid>div {
@@ -31,9 +31,7 @@
 }
 
 #storyboard-grid>div>.storyboard-description {
-    padding-left: 12px;
-    padding-right: 12px;
-    padding-top: 10px;
+    padding: 0.5rem 0.9rem 0rem;
 }
 
 #storyboard-grid>div>.storyboard-description>div.global-h4 {
