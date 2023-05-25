@@ -130,7 +130,7 @@ div.global-text-input {
 
 .global-button:focus {
 	outline: none;
-	border: 0.1rem solid var(--color-accent-focus);
+	border-color: var(--color-accent-focus);
 }
 
 a.global-button {
@@ -154,6 +154,20 @@ a.global-button:hover {
 .global-button-accent:hover {
 	background-color: var(--color-accent-focus);
 	border-color: var(--color-accent-focus);
+}
+
+.global-button-disabled {
+	color: var(--color-grey-dark-light);
+	cursor: unset;
+}
+
+.global-button-disabled:hover {
+	background-color: var(--color-grey-light);
+	border-color: var(--color-grey-light);
+}
+
+.global-button-disabled:focus {
+	border-color: var(--color-grey-light);
 }
 
 a.global-icon-button {

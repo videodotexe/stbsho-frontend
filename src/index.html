@@ -59,6 +59,13 @@
 		loginFormElem.onsubmit = event => {
 			const emailElem = document.getElementById("login-email");
 			const passwordElem = document.getElementById("login-password");
+			const loginBtnElem = document.getElementById("login-button");
+			loginBtnElem.classList.remove("global-button-accent");
+			loginBtnElem.classList.add("global-button-disabled");
+			loginBtnElem.disabled = true;
+			loginBtnElem.value = "Authenticating...";
+			emailElem.disabled = true;
+			passwordElem.disabled = true;
 			login(emailElem.value, passwordElem.value)
 			.then(() => {
 				window.location = loggedPage;
