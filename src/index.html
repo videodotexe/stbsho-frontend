@@ -27,7 +27,7 @@
 					</div>
 				</div>
 				<div>
-					<div id="login-form">
+					<form id="login-form">
 						<input 
 							class="global-text-input global-h4 large-text-input" 
 							type="text" placeholder="Email"
@@ -42,7 +42,7 @@
 							class="global-button global-button-accent global-h4"
 							type="submit" value="Login" id="login-button"
 						/>
-					</div>
+					</form>
 					<div id="register-link" class="global-h4">
 						Not a member?
 						<a href="register.html">
@@ -55,14 +55,15 @@
 
 		document.body.innerHTML = pageTemplate;
 
-		const loginBtnElem = document.getElementById("login-button");
-		loginBtnElem.onclick = event => {
+		const loginFormElem = document.getElementById("login-form");
+		loginFormElem.onsubmit = event => {
 			const emailElem = document.getElementById("login-email");
 			const passwordElem = document.getElementById("login-password");
 			login(emailElem.value, passwordElem.value)
 			.then(() => {
 				window.location = loggedPage;
 			})
+			event.preventDefault();
 		}
 
 		function login(email, password) {
