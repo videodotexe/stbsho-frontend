@@ -28,6 +28,9 @@
 				</div>
 				<div>
 					<form id="login-form">
+						<div id="login-error" class="global-transparent">
+							Incorrect email or password!
+						</div>
 						<input 
 							class="global-text-input global-h4 large-text-input" 
 							type="text" placeholder="Email"
@@ -46,7 +49,7 @@
 					<div id="register-link" class="global-h4">
 						Not a member?
 						<a href="register.html">
-							Register
+							Register.
 						</a>
 					</div>
 				</div>
@@ -56,10 +59,12 @@
 		document.body.innerHTML = pageTemplate;
 
 		const loginFormElem = document.getElementById("login-form");
+		const emailElem = document.getElementById("login-email");
+		const passwordElem = document.getElementById("login-password");
+		const loginBtnElem = document.getElementById("login-button");
+		const loginErrorElem = document.getElementById("login-error");
 		loginFormElem.onsubmit = event => {
-			const emailElem = document.getElementById("login-email");
-			const passwordElem = document.getElementById("login-password");
-			const loginBtnElem = document.getElementById("login-button");
+			loginErrorElem.classList.add("global-transparent");
 			loginBtnElem.classList.remove("global-button-accent");
 			loginBtnElem.classList.add("global-button-disabled");
 			loginBtnElem.disabled = true;
@@ -68,8 +73,19 @@
 			passwordElem.disabled = true;
 			login(emailElem.value, passwordElem.value)
 			.then(() => {
+				console.debug("Logged in.");
 				window.location = loggedPage;
 			})
+			.catch(() => {
+				loginErrorElem.classList.remove("global-transparent");
+				loginBtnElem.classList.add("global-button-accent");
+				loginBtnElem.classList.remove("global-button-disabled");
+				loginBtnElem.disabled = false;
+				loginBtnElem.value = "Login";
+				emailElem.disabled = false;
+				passwordElem.disabled = false;
+				passwordElem.value = "";
+			});
 			event.preventDefault();
 		}
 
@@ -86,11 +102,24 @@
 				},
 				body: JSON.stringify(body),
 			})
-			.then(res => res.json())
+			.then(res => {
+				if (res.ok) {
+					return res.json();
+				}
+				return Promise.reject(res);
+			})
 			.then(json => {
 				for (let key in json) {
 					window.sessionStorage.setItem(key, json[key]);
 				}
+			})
+			.catch(res => {
+				if (res.status == 401) {
+					return Promise.reject();
+				}
+				throw new Error(
+					`Login query returned unexpected ${res.status}.`
+				);
 			});
 		}
 	</script>

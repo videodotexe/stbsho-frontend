@@ -13,6 +13,8 @@
 	--color-grey-light:      #DDDDDD;
 	--color-grey-dark-light: #c7c7c7;
 	--color-grey-medium:     #A9A9A9;
+	--color-error-text:      #da3232;
+	--color-error-bg:        #ffdbdb;
 
 	--time-unit: 100ms;
 	--medium-time: calc(5*var(--time-unit));
@@ -271,6 +273,14 @@ select:focus {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+}
+
+.global-hidden {
+	display: none;
+}
+
+.global-transparent {
+	opacity: 0;
 }
 
 /* Animations */
