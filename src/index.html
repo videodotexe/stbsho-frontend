@@ -1,41 +1,126 @@
 <html>
 	<head>
 		<title>Storyboard Shower</title>
-
 		<link href="css/homepage.css" rel="stylesheet" />
 	</head>
 	<body>
-		<div id="content">
-			<div>
-				<div id="title">
-					storyboard<br/>shower
-				</div>
-				<div class="global-h3">
-					Some cheeky-ass motto that explains what stbsho is.
-				</div>
-			</div>
-			<div>
-				<form id="login-form">
-					<input 
-						class="global-text-input global-h4 large-text-input" 
-						type="text" placeholder="Email"
-					/>
-					<input 
-						class="global-text-input global-h4 large-text-input" 
-						type="password" placeholder="Password"
-					/>
-					<input
-						class="global-button global-button-accent global-h4"
-						type="submit" value="Login" 
-					/>
-				</form>
-				<div id="register-link" class="global-h4">
-					Not a member?
-					<a href="register.html">
-						Register
-					</a>
-				</div>
-			</div>
-		</div>
 	</body>
+
+	<script>
+
+		const loggedPage = "./storyboards.html";
+
+		// If the session has AccessToken then go to storyboards.html
+		const accessToken = window.sessionStorage.getItem("AccessToken");
+		if (accessToken) {
+			window.location = loggedPage;
+		}
+
+		const pageTemplate = `
+			<div id="content">
+				<div>
+					<div id="title">
+						storyboard<br/>shower
+					</div>
+					<div class="global-h3">
+						Some cheeky-ass motto that explains what stbsho is.
+					</div>
+				</div>
+				<div>
+					<form id="login-form">
+						<div id="login-error" class="global-transparent">
+							Incorrect email or password!
+						</div>
+						<input 
+							class="global-text-input global-h4 large-text-input" 
+							type="text" placeholder="Email"
+							id="login-email"
+						/>
+						<input 
+							class="global-text-input global-h4 large-text-input" 
+							type="password" placeholder="Password" 
+							id="login-password"
+						/>
+						<input
+							class="global-button global-button-accent global-h4"
+							type="submit" value="Login" id="login-button"
+						/>
+					</form>
+					<div id="register-link" class="global-h4">
+						Not a member?
+						<a href="register.html">
+							Register.
+						</a>
+					</div>
+				</div>
+			</div>
+		`;
+
+		document.body.innerHTML = pageTemplate;
+
+		const loginFormElem = document.getElementById("login-form");
+		const emailElem = document.getElementById("login-email");
+		const passwordElem = document.getElementById("login-password");
+		const loginBtnElem = document.getElementById("login-button");
+		const loginErrorElem = document.getElementById("login-error");
+		loginFormElem.onsubmit = event => {
+			loginErrorElem.classList.add("global-transparent");
+			loginBtnElem.classList.remove("global-button-accent");
+			loginBtnElem.classList.add("global-button-disabled");
+			loginBtnElem.disabled = true;
+			loginBtnElem.value = "Authenticating...";
+			emailElem.disabled = true;
+			passwordElem.disabled = true;
+			login(emailElem.value, passwordElem.value)
+			.then(() => {
+				console.debug("Logged in.");
+				window.location = loggedPage;
+			})
+			.catch(() => {
+				loginErrorElem.classList.remove("global-transparent");
+				loginBtnElem.classList.add("global-button-accent");
+				loginBtnElem.classList.remove("global-button-disabled");
+				loginBtnElem.disabled = false;
+				loginBtnElem.value = "Login";
+				emailElem.disabled = false;
+				passwordElem.disabled = false;
+				passwordElem.value = "";
+			});
+			event.preventDefault();
+		}
+
+		function login(email, password) {
+			const body = {
+				"email": email, 
+				"password": password,
+			}
+			const apiUrl = "https://04uc18437f.execute-api.eu-west-1.amazonaws.com/auth/login"
+			return fetch(apiUrl, {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(body),
+			})
+			.then(res => {
+				if (res.ok) {
+					return res.json();
+				}
+				return Promise.reject(res);
+			})
+			.then(json => {
+				for (let key in json) {
+					window.sessionStorage.setItem(key, json[key]);
+				}
+			})
+			.catch(res => {
+				if (res.status == 401) {
+					return Promise.reject();
+				}
+				throw new Error(
+					`Login query returned unexpected ${res.status}.`
+				);
+			});
+		}
+	</script>
 </html>

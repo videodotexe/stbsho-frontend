@@ -13,6 +13,8 @@
 	--color-grey-light:      #DDDDDD;
 	--color-grey-dark-light: #c7c7c7;
 	--color-grey-medium:     #A9A9A9;
+	--color-error-text:      #da3232;
+	--color-error-bg:        #ffdbdb;
 
 	--time-unit: 100ms;
 	--medium-time: calc(5*var(--time-unit));
@@ -130,7 +132,7 @@ div.global-text-input {
 
 .global-button:focus {
 	outline: none;
-	border: 0.1rem solid var(--color-accent-focus);
+	border-color: var(--color-accent-focus);
 }
 
 a.global-button {
@@ -154,6 +156,20 @@ a.global-button:hover {
 .global-button-accent:hover {
 	background-color: var(--color-accent-focus);
 	border-color: var(--color-accent-focus);
+}
+
+.global-button-disabled {
+	color: var(--color-grey-dark-light);
+	cursor: unset;
+}
+
+.global-button-disabled:hover {
+	background-color: var(--color-grey-light);
+	border-color: var(--color-grey-light);
+}
+
+.global-button-disabled:focus {
+	border-color: var(--color-grey-light);
 }
 
 a.global-icon-button {
@@ -250,13 +266,21 @@ select:focus {
 	position: absolute;
 	width: 100%;
 	height: 100%;
-	top: rem;
-	left: rem;
+	top: 0rem;
+	left: 0rem;
 	background-color: rgba(0, 0, 0, 0.5);
 
 	display: flex;
 	align-items: center;
 	justify-content: center;
+}
+
+.global-hidden {
+	display: none;
+}
+
+.global-transparent {
+	opacity: 0;
 }
 
 /* Animations */
