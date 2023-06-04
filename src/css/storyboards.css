@@ -14,6 +14,7 @@
 
     padding-top: 5rem;
     --element-width: 20rem;
+    --thumb-height: 14.1rem; /* Ratio of A4 paper */
 }
 
 #storyboard-grid>div {
@@ -23,6 +24,14 @@
 
 #storyboard-grid>div:hover>.storyboard-description>.global-h4 {
     text-decoration: underline;
+}
+
+#storyboard-grid>div>.storyboard-placeholder {
+    height: var(--thumb-height);
+    border: 1px solid var(--color-grey-light);
+
+    display: flex;
+    align-items: center;
 }
 
 #storyboard-grid>div>.storyboard-placeholder>img {
