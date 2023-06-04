@@ -70,7 +70,10 @@
 						const stb = storyboards[stbId];
 						const singleThumbUrl = stb["Thumbnails"]["Single"];
 						const stbElem = document.createElement("div");
-						const date = stb["CreatedAt"];
+						const dateObj = new Date(stb["CreatedAt"]);
+						const dateStr = dateObj.toLocaleDateString("en-US", {
+							year: "numeric", month: "long", day: "numeric"
+						});
 						stbElem.innerHTML = `
 							<div class="storyboard-placeholder">
 								<img src="${singleThumbUrl}" />
@@ -80,7 +83,7 @@
 									${stb["Title"]}
 								</div>
 								<div class="global-grey-text">
-									${date}
+									${dateStr}
 								</div>
 							</div>
 						`;
