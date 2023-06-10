@@ -92,6 +92,23 @@
 
 				function _inner() {
 					
+					// Show element ASAP even if empty
+					const overlayElem = document.createElement("div");
+					overlayElem.classList.add("global-overlay");
+					overlayElem.style.top = `${document.documentElement.scrollTop}px`;
+					const stbOverlayElem = document.createElement("div");
+					stbOverlayElem.classList.add("storyboard-overlay");
+					const overlayLeftElem = document.createElement("div");
+					overlayLeftElem.classList.add("overlay-left");
+					const overlayRightElem = document.createElement("div");
+					overlayRightElem.classList.add("overlay-right");
+					
+					stbOverlayElem.appendChild(overlayLeftElem);
+					stbOverlayElem.appendChild(overlayRightElem);
+					overlayElem.appendChild(stbOverlayElem);
+					document.body.appendChild(overlayElem);
+					document.body.classList.add("global-no-scroll");
+
 					const apiUrl = `https://04uc18437f.execute-api.eu-west-1.amazonaws.com/user/${username}/${stbId}`;
 					console.log(apiUrl);
 					fetch(apiUrl, {
@@ -102,165 +119,153 @@
 					.then(res => res.json())
 					.then(stbData => {
 
-						const stbOverlayElem = document.createElement("div");
-						stbOverlayElem.classList.add("global-overlay");
-
 						const publicToggleClass = stbData["public"] ? "" : "global-toggle-off";
-						stbOverlayElem.innerHTML = `
-							<div class="storyboard-overlay">
-								<div class="overlay-left">
-
+						overlayRightElem.innerHTML = `
+							<div>
+								<div class="header">
+									<div class="global-h4">
+										${stbData["title"]}
+									</div>
+									<a 
+										class="global-button global-small-icon-button global-clear-button"
+										id="js-stb-overlay-close-btn"
+									>
+										<img src="images/button_icons/cross.svg">
+									</a>
 								</div>
-								<div class="overlay-right">
-									<div>
-										<div class="header">
-											<div class="global-h4">
-												${stbData["title"]}
+								<div class="global-description-text global-grey-text">
+									Created on ${formatDate(stbData["createdAt"])}
+								</div>
+							</div>
+
+							<div id="options-panel">
+
+								<div class="option-block">
+									<div class="option-upper-bar">
+										<div>
+											<div class="global-regular-text-accent">
+												Public
 											</div>
-											<a 
-												class="global-button global-small-icon-button global-clear-button"
-												id="js-stb-overlay-close-btn"
-											>
-												<img src="images/button_icons/cross.svg">
-											</a>
+											<div class="global-description-text">
+												Make the storyboard accessible to others
+											</div>
 										</div>
-										<div class="global-description-text global-grey-text">
-											Created on ${formatDate(stbData["createdAt"])}
+										<div>
+											<div class="global-toggle ${publicToggleClass}">
+												<div></div>
+											</div>
 										</div>
 									</div>
+								</div>
 
-									<div id="options-panel">
-
-										<div class="option-block">
-											<div class="option-upper-bar">
-												<div>
-													<div class="global-regular-text-accent">
-														Public
-													</div>
-													<div class="global-description-text">
-														Make the storyboard accessible to others
-													</div>
-												</div>
-												<div>
-													<div class="global-toggle ${publicToggleClass}">
-														<div></div>
-													</div>
-												</div>
+								<div class="option-block">
+									<div class="option-upper-bar">
+										<div>
+											<div class="global-regular-text-accent">
+												Link
+											</div>
+											<div class="global-description-text">
+												Give this link to anyone
 											</div>
 										</div>
-
-										<div class="option-block">
-											<div class="option-upper-bar">
-												<div>
-													<div class="global-regular-text-accent">
-														Link
-													</div>
-													<div class="global-description-text">
-														Give this link to anyone
-													</div>
-												</div>
-												<div>
-													<a class="global-button global-small-icon-button" title="Copy link">
-														<img src="images/button_icons/copy.svg">
-													</a>
-												</div>
-											</div>
-											<input 
-												type="text" readonly="1"
-												class="global-text-input global-mono-text global-grey-text" 
-												value="https://d1bxsdz0n811yu.cloudfront.net/widget.html?stb=3bb85020-3dd6-4430-964b-f8705bcb6813"
-											/>
+										<div>
+											<a class="global-button global-small-icon-button" title="Copy link">
+												<img src="images/button_icons/copy.svg">
+											</a>
 										</div>
+									</div>
+									<input 
+										type="text" readonly="1"
+										class="global-text-input global-mono-text global-grey-text" 
+										value="https://d1bxsdz0n811yu.cloudfront.net/widget.html?stb=3bb85020-3dd6-4430-964b-f8705bcb6813"
+									/>
+								</div>
 
-										<div class="option-block">
-											<div class="option-upper-bar">
-												<div>
-													<div class="global-regular-text-accent">
-														Embed
-													</div>
-													<div class="global-description-text">
-														Paste this in your webpage
-													</div>
-												</div>
-												<div>
-													<a class="global-button global-small-icon-button" title="Copy code">
-														<img src="images/button_icons/copy.svg">
-													</a>
-												</div>
+								<div class="option-block">
+									<div class="option-upper-bar">
+										<div>
+											<div class="global-regular-text-accent">
+												Embed
 											</div>
-											<div class="global-text-input global-mono-text global-grey-text">
-												&lt;iframe src=”https://d1bxsdz0n811yu.cloudfront.net/widget.html?stb=3bb85020-3dd6-4430-964b-f8705bcb6813” style="border: 0px; width: 800px; height: 450px;"&gt;&lt;/iframe&gt;
+											<div class="global-description-text">
+												Paste this in your webpage
 											</div>
 										</div>
+										<div>
+											<a class="global-button global-small-icon-button" title="Copy code">
+												<img src="images/button_icons/copy.svg">
+											</a>
+										</div>
+									</div>
+									<div class="global-text-input global-mono-text global-grey-text">
+										&lt;iframe src=”https://d1bxsdz0n811yu.cloudfront.net/widget.html?stb=3bb85020-3dd6-4430-964b-f8705bcb6813” style="border: 0px; width: 800px; height: 450px;"&gt;&lt;/iframe&gt;
+									</div>
+								</div>
 
-										<div class="option-block">
-											<div class="option-upper-bar">
-												<div>
-													<div class="global-regular-text-accent">
-														Description
-													</div>
-													<div class="global-description-text">
-														A short text to describe the board
-													</div>
-												</div>
-												<div>
-													<a class="global-button global-small-icon-button" title="Edit description">
-														<img src="images/button_icons/edit.svg">
-													</a>
-												</div>
+								<div class="option-block">
+									<div class="option-upper-bar">
+										<div>
+											<div class="global-regular-text-accent">
+												Description
 											</div>
-											<div class="global-text-input global-grey-text">
-												${stbData["description"]}
+											<div class="global-description-text">
+												A short text to describe the board
 											</div>
 										</div>
+										<div>
+											<a class="global-button global-small-icon-button" title="Edit description">
+												<img src="images/button_icons/edit.svg">
+											</a>
+										</div>
+									</div>
+									<div class="global-text-input global-grey-text">
+										${stbData["description"]}
+									</div>
+								</div>
 
-										<div class="option-block">
-											<div class="option-upper-bar">
-												<div>
-													<div class="global-regular-text-accent">
-														Rename
-													</div>
-													<div class="global-description-text">
-														Change the title of this stroyboard
-													</div>
-												</div>
-												<div>
-													<a class="global-button global-small-icon-button" title="Rename storyboard">
-														<img src="images/button_icons/edit.svg">
-													</a>
-												</div>
+								<div class="option-block">
+									<div class="option-upper-bar">
+										<div>
+											<div class="global-regular-text-accent">
+												Rename
+											</div>
+											<div class="global-description-text">
+												Change the title of this stroyboard
 											</div>
 										</div>
+										<div>
+											<a class="global-button global-small-icon-button" title="Rename storyboard">
+												<img src="images/button_icons/edit.svg">
+											</a>
+										</div>
+									</div>
+								</div>
 
-										<div class="option-block">
-											<div class="option-upper-bar">
-												<div>
-													<div class="global-regular-text-accent">
-														Delete
-													</div>
-													<div class="global-description-text">
-														Delete this storyboard permanently
-													</div>
-												</div>
-												<div>
-													<a class="global-button global-small-icon-button" title="Delete storyboard">
-														<img src="images/button_icons/trashbin.svg">
-													</a>
-												</div>
+								<div class="option-block">
+									<div class="option-upper-bar">
+										<div>
+											<div class="global-regular-text-accent">
+												Delete
 											</div>
+											<div class="global-description-text">
+												Delete this storyboard permanently
+											</div>
+										</div>
+										<div>
+											<a class="global-button global-small-icon-button" title="Delete storyboard">
+												<img src="images/button_icons/trashbin.svg">
+											</a>
 										</div>
 									</div>
 								</div>
 							</div>
 						`;
-						document.body.appendChild(stbOverlayElem);
-						stbOverlayElem.style.top = `${document.documentElement.scrollTop}px`;
-						document.body.classList.add("global-no-scroll");
 	
+						// Add close logic to the dialog
 						const stbOverlayCloseBtnElem = document.getElementById("js-stb-overlay-close-btn");
 						stbOverlayCloseBtnElem.onclick = event => {
 							document.body.classList.remove("global-no-scroll");
-							stbOverlayElem.remove();
+							overlayElem.remove();
 						};
 					});
 				}
