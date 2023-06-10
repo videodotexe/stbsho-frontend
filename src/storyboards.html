@@ -55,42 +55,41 @@
 				`;
 
 				document.body.innerHTML = pageTemplate;
-
+				const accessToken = window.sessionStorage.getItem("AccessToken");
+				const apiUrl = `https://04uc18437f.execute-api.eu-west-1.amazonaws.com/user/${username}/storyboards?authed=1`;
 				const gridElem = document.getElementById("storyboard-grid");
-				[
-					"The amazing storyboard",
-					"Another yet amazing storyboard",
-					"Super duper storyboard",
-					"Not so cool storyboard",
-					"The amazing storyboard",
-					"Another yet amazing storyboard",
-					"Super duper storyboard",
-					"Not so cool storyboard",
-					"The amazing storyboard",
-					"Another yet amazing storyboard",
-					"Super duper storyboard",
-					"Not so cool storyboard",
-					"The amazing storyboard",
-					"Another yet amazing storyboard",
-					"Super duper storyboard",
-					"Not so cool storyboard",
-				].forEach(title => {
-					const stbElem = document.createElement("div");
-					stbElem.innerHTML = `
-						<div class="storyboard-placeholder">
-							<img src="images/placeholder.png" />
-						</div>
-						<div class="storyboard-description">
-							<div class="global-h4">
-								${title}
+				fetch(apiUrl, {
+					headers: {
+						"Authentication": accessToken,
+					}
+				})
+				.then(res => res.json())
+				.then(json => {
+					const storyboards = json["Storyboards"];
+					for (let stbId in storyboards) {
+						const stb = storyboards[stbId];
+						const singleThumbUrl = stb["Thumbnails"]["Single"];
+						const stbElem = document.createElement("div");
+						const dateObj = new Date(stb["CreatedAt"]);
+						const dateStr = dateObj.toLocaleDateString("en-US", {
+							year: "numeric", month: "long", day: "numeric"
+						});
+						stbElem.innerHTML = `
+							<div class="storyboard-placeholder">
+								<img src="${singleThumbUrl}" />
 							</div>
-							<div class="global-grey-text">
-								23 March 2023
+							<div class="storyboard-description">
+								<div class="global-h4">
+									${stb["Title"]}
+								</div>
+								<div class="global-grey-text">
+									${dateStr}
+								</div>
 							</div>
-						</div>
-					`;
-					stbElem.onclick = showStbOverlay;
-					gridElem.appendChild(stbElem);
+						`;
+						stbElem.onclick = showStbOverlay;
+						gridElem.appendChild(stbElem);
+					}
 				});
 			});
 
