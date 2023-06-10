@@ -283,6 +283,20 @@ select:focus {
 	opacity: 0;
 }
 
+.global-greyed {
+	opacity: 0.3;
+}
+
+.global-greyed::after {
+	content: "";
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0%;
+	left: 0%;
+	opacity: 0;
+}
+
 /* Animations */
 @keyframes opacity-fade-in {
     0% {

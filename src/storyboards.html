@@ -92,7 +92,7 @@
 
 				function _inner() {
 					
-					// Show element ASAP even if empty
+					// Show element ASAP even if empty for now
 					const overlayElem = document.createElement("div");
 					overlayElem.classList.add("global-overlay");
 					overlayElem.style.top = `${document.documentElement.scrollTop}px`;
@@ -102,13 +102,13 @@
 					overlayLeftElem.classList.add("overlay-left");
 					const overlayRightElem = document.createElement("div");
 					overlayRightElem.classList.add("overlay-right");
-					
 					stbOverlayElem.appendChild(overlayLeftElem);
 					stbOverlayElem.appendChild(overlayRightElem);
 					overlayElem.appendChild(stbOverlayElem);
 					document.body.appendChild(overlayElem);
 					document.body.classList.add("global-no-scroll");
 
+					// Fetch storyboard data
 					const apiUrl = `https://04uc18437f.execute-api.eu-west-1.amazonaws.com/user/${username}/${stbId}`;
 					console.log(apiUrl);
 					fetch(apiUrl, {
@@ -119,7 +119,10 @@
 					.then(res => res.json())
 					.then(stbData => {
 
+						// Hide elements and set them up according storyboard's visibility.
 						const publicToggleClass = stbData["public"] ? "" : "global-toggle-off";
+						const linkEmbedOptClass = stbData["public"] ? "" : "global-greyed";
+
 						overlayRightElem.innerHTML = `
 							<div>
 								<div class="header">
@@ -151,14 +154,14 @@
 											</div>
 										</div>
 										<div>
-											<div class="global-toggle ${publicToggleClass}">
+											<div class="global-toggle ${publicToggleClass}" id="js-stb-public-toggle">
 												<div></div>
 											</div>
 										</div>
 									</div>
 								</div>
 
-								<div class="option-block">
+								<div class="option-block ${linkEmbedOptClass}" id="js-link-option">
 									<div class="option-upper-bar">
 										<div>
 											<div class="global-regular-text-accent">
@@ -181,7 +184,7 @@
 									/>
 								</div>
 
-								<div class="option-block">
+								<div class="option-block ${linkEmbedOptClass}" id="js-embed-option">
 									<div class="option-upper-bar">
 										<div>
 											<div class="global-regular-text-accent">
@@ -266,6 +269,26 @@
 						stbOverlayCloseBtnElem.onclick = event => {
 							document.body.classList.remove("global-no-scroll");
 							overlayElem.remove();
+						};
+
+						const linkOptElem = document.getElementById("js-link-option");
+						const embedOptElem = document.getElementById("js-embed-option");
+						const publicToggleElem = document.getElementById("js-stb-public-toggle");
+						
+						publicToggleElem.onclick = () => {
+							if(stbData["public"]){
+								// Public -> OFF
+								publicToggleElem.classList.add("global-toggle-off");
+								linkOptElem.classList.add("global-greyed");
+								embedOptElem.classList.add("global-greyed");
+							} else {
+								// Public -> ON
+								publicToggleElem.classList.remove("global-toggle-off");
+								linkOptElem.classList.remove("global-greyed");
+								embedOptElem.classList.remove("global-greyed");
+							}
+							// Temporary before connecting the backend
+							stbData["public"] = !stbData["public"];
 						};
 					});
 				}

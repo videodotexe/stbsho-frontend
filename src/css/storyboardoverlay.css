@@ -45,6 +45,7 @@
     display: flex;
     flex-direction: column;
     gap: 0.7rem;
+    transition: opacity var(--time-unit);
 }
 
 .option-upper-bar {
