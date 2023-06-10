@@ -10,7 +10,7 @@
 		<script src="./js/apiurl.js"></script>
 		<script src="./js/checkauth.js"></script>
 		<script>
-
+			const accessToken = window.sessionStorage.getItem("AccessToken");
 			checkAuth()
 			.catch(() => {
 				window.location = "./index.html";
@@ -55,7 +55,6 @@
 				`;
 
 				document.body.innerHTML = pageTemplate;
-				const accessToken = window.sessionStorage.getItem("AccessToken");
 				const apiUrl = `https://04uc18437f.execute-api.eu-west-1.amazonaws.com/user/${username}/storyboards?authed=1`;
 				const gridElem = document.getElementById("storyboard-grid");
 				fetch(apiUrl, {
@@ -65,196 +64,215 @@
 				})
 				.then(res => res.json())
 				.then(json => {
-					const storyboards = json["Storyboards"];
+					const storyboards = json["storyboards"];
 					for (let stbId in storyboards) {
-						const stb = storyboards[stbId];
-						const singleThumbUrl = stb["Thumbnails"]["Single"];
+						const stbData = storyboards[stbId];
 						const stbElem = document.createElement("div");
-						const dateObj = new Date(stb["CreatedAt"]);
-						const dateStr = dateObj.toLocaleDateString("en-US", {
-							year: "numeric", month: "long", day: "numeric"
-						});
 						stbElem.innerHTML = `
 							<div class="storyboard-placeholder">
-								<img src="${singleThumbUrl}" />
+								<img src="${stbData["thumbnails"]["single"]}" />
 							</div>
 							<div class="storyboard-description">
 								<div class="global-h4">
-									${stb["Title"]}
+									${stbData["title"]}
 								</div>
 								<div class="global-grey-text">
-									${dateStr}
+									${formatDate(stbData["createdAt"])}
 								</div>
 							</div>
 						`;
-						stbElem.onclick = showStbOverlay;
+
+						stbElem.onclick = showStbOverlay(username, stbId);
 						gridElem.appendChild(stbElem);
 					}
 				});
 			});
 
-			function showStbOverlay() {
-				const stbOverlayTemplate = `
-					<div class="storyboard-overlay">
-						<div class="overlay-left">
+			function showStbOverlay(username, stbId) {
 
-						</div>
-						<div class="overlay-right">
-							<div>
-								<div class="header">
-									<div class="global-h4">
-										Yet another amazing storyboard
-									</div>
-									<a 
-										class="global-button global-small-icon-button global-clear-button"
-										id="js-stb-overlay-close-btn"
-									>
-										<img src="images/button_icons/cross.svg">
-									</a>
+				function _inner() {
+					
+					const apiUrl = `https://04uc18437f.execute-api.eu-west-1.amazonaws.com/user/${username}/${stbId}`;
+					console.log(apiUrl);
+					fetch(apiUrl, {
+						headers: {
+							"Authentication": accessToken,
+						}
+					})
+					.then(res => res.json())
+					.then(stbData => {
+
+						const stbOverlayElem = document.createElement("div");
+						stbOverlayElem.classList.add("global-overlay");
+
+						const publicToggleClass = stbData["public"] ? "" : "global-toggle-off";
+						stbOverlayElem.innerHTML = `
+							<div class="storyboard-overlay">
+								<div class="overlay-left">
+
 								</div>
-								<div class="global-description-text global-grey-text">
-									Created on 23 March 2023
+								<div class="overlay-right">
+									<div>
+										<div class="header">
+											<div class="global-h4">
+												${stbData["title"]}
+											</div>
+											<a 
+												class="global-button global-small-icon-button global-clear-button"
+												id="js-stb-overlay-close-btn"
+											>
+												<img src="images/button_icons/cross.svg">
+											</a>
+										</div>
+										<div class="global-description-text global-grey-text">
+											Created on ${formatDate(stbData["createdAt"])}
+										</div>
+									</div>
+
+									<div id="options-panel">
+
+										<div class="option-block">
+											<div class="option-upper-bar">
+												<div>
+													<div class="global-regular-text-accent">
+														Public
+													</div>
+													<div class="global-description-text">
+														Make the storyboard accessible to others
+													</div>
+												</div>
+												<div>
+													<div class="global-toggle ${publicToggleClass}">
+														<div></div>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<div class="option-block">
+											<div class="option-upper-bar">
+												<div>
+													<div class="global-regular-text-accent">
+														Link
+													</div>
+													<div class="global-description-text">
+														Give this link to anyone
+													</div>
+												</div>
+												<div>
+													<a class="global-button global-small-icon-button" title="Copy link">
+														<img src="images/button_icons/copy.svg">
+													</a>
+												</div>
+											</div>
+											<input 
+												type="text" readonly="1"
+												class="global-text-input global-mono-text global-grey-text" 
+												value="https://d1bxsdz0n811yu.cloudfront.net/widget.html?stb=3bb85020-3dd6-4430-964b-f8705bcb6813"
+											/>
+										</div>
+
+										<div class="option-block">
+											<div class="option-upper-bar">
+												<div>
+													<div class="global-regular-text-accent">
+														Embed
+													</div>
+													<div class="global-description-text">
+														Paste this in your webpage
+													</div>
+												</div>
+												<div>
+													<a class="global-button global-small-icon-button" title="Copy code">
+														<img src="images/button_icons/copy.svg">
+													</a>
+												</div>
+											</div>
+											<div class="global-text-input global-mono-text global-grey-text">
+												&lt;iframe src=”https://d1bxsdz0n811yu.cloudfront.net/widget.html?stb=3bb85020-3dd6-4430-964b-f8705bcb6813” style="border: 0px; width: 800px; height: 450px;"&gt;&lt;/iframe&gt;
+											</div>
+										</div>
+
+										<div class="option-block">
+											<div class="option-upper-bar">
+												<div>
+													<div class="global-regular-text-accent">
+														Description
+													</div>
+													<div class="global-description-text">
+														A short text to describe the board
+													</div>
+												</div>
+												<div>
+													<a class="global-button global-small-icon-button" title="Edit description">
+														<img src="images/button_icons/edit.svg">
+													</a>
+												</div>
+											</div>
+											<div class="global-text-input global-grey-text">
+												${stbData["description"]}
+											</div>
+										</div>
+
+										<div class="option-block">
+											<div class="option-upper-bar">
+												<div>
+													<div class="global-regular-text-accent">
+														Rename
+													</div>
+													<div class="global-description-text">
+														Change the title of this stroyboard
+													</div>
+												</div>
+												<div>
+													<a class="global-button global-small-icon-button" title="Rename storyboard">
+														<img src="images/button_icons/edit.svg">
+													</a>
+												</div>
+											</div>
+										</div>
+
+										<div class="option-block">
+											<div class="option-upper-bar">
+												<div>
+													<div class="global-regular-text-accent">
+														Delete
+													</div>
+													<div class="global-description-text">
+														Delete this storyboard permanently
+													</div>
+												</div>
+												<div>
+													<a class="global-button global-small-icon-button" title="Delete storyboard">
+														<img src="images/button_icons/trashbin.svg">
+													</a>
+												</div>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
+						`;
+						document.body.appendChild(stbOverlayElem);
+						stbOverlayElem.style.top = `${document.documentElement.scrollTop}px`;
+						document.body.classList.add("global-no-scroll");
+	
+						const stbOverlayCloseBtnElem = document.getElementById("js-stb-overlay-close-btn");
+						stbOverlayCloseBtnElem.onclick = event => {
+							document.body.classList.remove("global-no-scroll");
+							stbOverlayElem.remove();
+						};
+					});
+				}
 
-							<div id="options-panel">
+				return _inner;
+			}
 
-								<div class="option-block">
-									<div class="option-upper-bar">
-										<div>
-											<div class="global-regular-text-accent">
-												Public
-											</div>
-											<div class="global-description-text">
-												Make the storyboard accessible to others
-											</div>
-										</div>
-										<div>
-											<div class="global-toggle">
-												<div></div>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="option-block">
-									<div class="option-upper-bar">
-										<div>
-											<div class="global-regular-text-accent">
-												Link
-											</div>
-											<div class="global-description-text">
-												Give this link to anyone
-											</div>
-										</div>
-										<div>
-											<a class="global-button global-small-icon-button" title="Copy link">
-												<img src="images/button_icons/copy.svg">
-											</a>
-										</div>
-									</div>
-									<input 
-										type="text" readonly="1"
-										class="global-text-input global-mono-text global-grey-text" 
-										value="https://d1bxsdz0n811yu.cloudfront.net/widget.html?stb=3bb85020-3dd6-4430-964b-f8705bcb6813"
-									/>
-								</div>
-
-								<div class="option-block">
-									<div class="option-upper-bar">
-										<div>
-											<div class="global-regular-text-accent">
-												Embed
-											</div>
-											<div class="global-description-text">
-												Paste this in your webpage
-											</div>
-										</div>
-										<div>
-											<a class="global-button global-small-icon-button" title="Copy code">
-												<img src="images/button_icons/copy.svg">
-											</a>
-										</div>
-									</div>
-									<div class="global-text-input global-mono-text global-grey-text">
-										&lt;iframe src=”https://d1bxsdz0n811yu.cloudfront.net/widget.html?stb=3bb85020-3dd6-4430-964b-f8705bcb6813” style="border: 0px; width: 800px; height: 450px;"&gt;&lt;/iframe&gt;
-									</div>
-								</div>
-
-								<div class="option-block">
-									<div class="option-upper-bar">
-										<div>
-											<div class="global-regular-text-accent">
-												Description
-											</div>
-											<div class="global-description-text">
-												A short text to describe the board
-											</div>
-										</div>
-										<div>
-											<a class="global-button global-small-icon-button" title="Edit description">
-												<img src="images/button_icons/edit.svg">
-											</a>
-										</div>
-									</div>
-									<div class="global-text-input global-grey-text">
-										Molestiae a maxime quia mollitia. Sapiente ut dolorem ut. Aut optio quisquam qui dolor qui ut aperiam. Dicta rerum et sapiente officiis voluptas sed. Harum sunt reiciendis optio ea adipisci praesentium mollitia est. Eveniet facilis minima culpa in id provident accusamus.
-										Laborum harum repellat nulla et assumenda reprehenderit esse asperiores. Cupiditate sed numquam ipsum soluta tempora. Ex quis quia voluptate sed. Eum iusto ipsam animi repellendus laboriosam. Accusantium corporis cumque quasi.
-									</div>
-								</div>
-
-								<div class="option-block">
-									<div class="option-upper-bar">
-										<div>
-											<div class="global-regular-text-accent">
-												Rename
-											</div>
-											<div class="global-description-text">
-												Change the title of this stroyboard
-											</div>
-										</div>
-										<div>
-											<a class="global-button global-small-icon-button" title="Rename storyboard">
-												<img src="images/button_icons/edit.svg">
-											</a>
-										</div>
-									</div>
-								</div>
-
-								<div class="option-block">
-									<div class="option-upper-bar">
-										<div>
-											<div class="global-regular-text-accent">
-												Delete
-											</div>
-											<div class="global-description-text">
-												Delete this storyboard permanently
-											</div>
-										</div>
-										<div>
-											<a class="global-button global-small-icon-button" title="Delete storyboard">
-												<img src="images/button_icons/trashbin.svg">
-											</a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				`
-				
-				const stbOverlayElem = document.createElement("div");
-				stbOverlayElem.classList.add("global-overlay");
-				stbOverlayElem.innerHTML = stbOverlayTemplate;
-				document.body.appendChild(stbOverlayElem);
-				stbOverlayElem.style.top = `${document.documentElement.scrollTop}px`;
-				document.body.classList.add("global-no-scroll");
-
-				const stbOverlayCloseBtnElem = document.getElementById("js-stb-overlay-close-btn");
-				stbOverlayCloseBtnElem.onclick = event => {
-					document.body.classList.remove("global-no-scroll");
-					stbOverlayElem.remove();
-				};
+			function formatDate(isoDate) {
+				const dateObj = new Date(isoDate);
+				return dateObj.toLocaleDateString("en-US", {
+					year: "numeric", month: "long", day: "numeric"
+				});
 			}
 		</script>
 	</body>
