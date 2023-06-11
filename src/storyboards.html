@@ -271,46 +271,8 @@
 							overlayElem.remove();
 						};
 
-						const linkOptElem = document.getElementById("js-link-option");
-						const embedOptElem = document.getElementById("js-embed-option");
 						const publicToggleElem = document.getElementById("js-stb-public-toggle");
-						
-						publicToggleElem.onclick = () => {
-							const apiUrl = `https://04uc18437f.execute-api.eu-west-1.amazonaws.com/user/${username}/${stbId}`;
-							const patchData = {
-								"public": !stbData["public"]
-							}
-							publicToggleElem.classList.add("global-greyed");
-							fetch(apiUrl, {
-								method: "PATCH",
-								headers: {
-									"Authentication": accessToken,
-									"Content-Type": "application/json"
-								},
-								body: JSON.stringify(patchData)
-							})
-							.then(res => {
-								publicToggleElem.classList.remove("global-greyed");
-								if (!res.ok) {
-									// TODO: Make this more decent
-									throw new Error("Impossible to edit storyboard data!");
-								} else {
-									if(patchData["public"] == false){
-										// Public -> OFF
-										publicToggleElem.classList.add("global-toggle-off");
-										linkOptElem.classList.add("global-greyed");
-										embedOptElem.classList.add("global-greyed");
-									} else {
-										// Public -> ON
-										publicToggleElem.classList.remove("global-toggle-off");
-										linkOptElem.classList.remove("global-greyed");
-										embedOptElem.classList.remove("global-greyed");
-									}
-									// Update the data locally
-									stbData["public"] = patchData["public"];
-								}
-							})
-						};
+						publicToggleElem.onclick = genPublicToggleHandler(username, stbId, stbData);
 					});
 				}
 
@@ -322,6 +284,53 @@
 				return dateObj.toLocaleDateString("en-US", {
 					year: "numeric", month: "long", day: "numeric"
 				});
+			}
+
+			function genPublicToggleHandler(username, stbId, stbData) {
+
+				function _inner() {
+					const linkOptElem = document.getElementById("js-link-option");
+					const embedOptElem = document.getElementById("js-embed-option");
+					const publicToggleElem = document.getElementById("js-stb-public-toggle");
+
+					const apiUrl = `https://04uc18437f.execute-api.eu-west-1.amazonaws.com/user/${username}/${stbId}`;
+					const patchData = {
+						"public": !stbData["public"]
+					}
+					const accessToken = window.sessionStorage.getItem("AccessToken");
+					publicToggleElem.classList.add("global-greyed");
+					fetch(apiUrl, {
+						method: "PATCH",
+						headers: {
+							"Authentication": accessToken,
+							"Content-Type": "application/json"
+						},
+						body: JSON.stringify(patchData)
+					})
+					.then(res => {
+						publicToggleElem.classList.remove("global-greyed");
+						if (!res.ok) {
+							// TODO: Make this more decent
+							throw new Error("Impossible to edit storyboard data!");
+						} else {
+							if(patchData["public"] == false){
+								// Public -> OFF
+								publicToggleElem.classList.add("global-toggle-off");
+								linkOptElem.classList.add("global-greyed");
+								embedOptElem.classList.add("global-greyed");
+							} else {
+								// Public -> ON
+								publicToggleElem.classList.remove("global-toggle-off");
+								linkOptElem.classList.remove("global-greyed");
+								embedOptElem.classList.remove("global-greyed");
+							}
+							// Update the data locally
+							stbData["public"] = patchData["public"];
+						}
+					})
+				}
+
+				return _inner
 			}
 		</script>
 	</body>
