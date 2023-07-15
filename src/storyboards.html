@@ -73,7 +73,7 @@
 								<img src="${stbData["thumbnails"]["single"]}" />
 							</div>
 							<div class="storyboard-description">
-								<div class="global-h4">
+								<div class="global-h4" id="js-stb-tile-title-${stbId}">
 									${stbData["title"]}
 								</div>
 								<div class="global-grey-text">
@@ -125,8 +125,8 @@
 
 						overlayRightElem.innerHTML = `
 							<div>
-								<div class="header">
-									<div class="global-h4">
+								<div class="overlay-header">
+									<div class="global-h4" id="js-stb-overlay-title">
 										${stbData["title"]}
 									</div>
 									<a 
@@ -233,11 +233,15 @@
 												Rename
 											</div>
 											<div class="global-description-text">
-												Change the title of this stroyboard
+												Change the title of this storyboard
 											</div>
 										</div>
 										<div>
-											<a class="global-button global-small-icon-button" title="Rename storyboard">
+											<a 
+												class="global-button global-small-icon-button" 
+												title="Rename storyboard"
+												id="js-stb-rename-btn"
+											>
 												<img src="images/button_icons/edit.svg">
 											</a>
 										</div>
@@ -273,6 +277,9 @@
 
 						const publicToggleElem = document.getElementById("js-stb-public-toggle");
 						publicToggleElem.onclick = genPublicToggleHandler(username, stbId, stbData);
+						
+						const renameBtnElem = document.getElementById("js-stb-rename-btn");
+						renameBtnElem.onclick = genRenameHandler(username, stbId, stbData);
 					});
 				}
 
@@ -284,6 +291,105 @@
 				return dateObj.toLocaleDateString("en-US", {
 					year: "numeric", month: "long", day: "numeric"
 				});
+			}
+
+			function genRenameHandler(username, stbId, stbData) {
+				function _inner() {
+					const overlayElem = document.createElement("div");
+					overlayElem.classList.add("global-overlay");
+					overlayElem.style.top = `${document.documentElement.scrollTop}px`;
+					
+					overlayElem.innerHTML = `
+						<div class="dialog-overlay">
+							<div class="overlay-header">
+								<div class="global-h4">
+									Rename storyboard
+								</div>
+								<a 
+									class="global-button global-small-icon-button global-clear-button"
+									id="js-rename-overlay-close-btn"
+								>
+									<img src="images/button_icons/cross.svg">
+								</a>
+							</div>
+							<div>
+								<form id="js-stb-rename-form">
+									<input 
+										class="global-text-input" 
+										type="text"
+										value="${stbData["title"]}"
+										id="js-stb-title-input"
+									/>
+									<div class="dialog-buttons">
+										<input
+											class="global-button"
+											type="button" value="Cancel" 
+											id="js-rename-cancel-button"
+										/>
+										<input
+											class="global-button global-button-accent"
+											type="submit" value="Rename" 
+											id="js-stb-rename-button"
+										/>
+									</div>
+								</form>
+							</div>
+						</div>
+					`;
+					
+					document.body.appendChild(overlayElem);
+					document.body.classList.add("global-no-scroll");
+
+					const renameOverlayCloseBtnElem = document.getElementById("js-rename-overlay-close-btn");
+					const cancelBtnElem = document.getElementById("js-rename-cancel-button");
+					const closeAction = event => {
+						document.body.classList.remove("global-no-scroll");
+						overlayElem.remove();
+					};
+					renameOverlayCloseBtnElem.onclick = closeAction;
+					cancelBtnElem.onclick = closeAction;
+
+					const renameFormElem = document.getElementById("js-stb-rename-form");
+					const stbTitleInputElem = document.getElementById("js-stb-title-input");
+					const renameSubmitBtnElem = document.getElementById("js-stb-rename-button");
+					renameFormElem.onsubmit = event => {
+						const apiUrl = `https://04uc18437f.execute-api.eu-west-1.amazonaws.com/user/${username}/${stbId}`;
+						const patchData = {
+							"title": stbTitleInputElem.value
+						}
+						const accessToken = window.sessionStorage.getItem("AccessToken");
+						renameSubmitBtnElem.classList.remove("global-button-accent");
+						renameSubmitBtnElem.classList.add("global-button-disabled");
+						fetch(apiUrl, {
+							method: "PATCH",
+							headers: {
+								"Authentication": accessToken,
+								"Content-Type": "application/json"
+							},
+							body: JSON.stringify(patchData)
+						})
+						.then(res => {
+							if (!res.ok) {
+								// TODO: Make this more decent
+								throw new Error("Impossible to edit storyboard data!");
+							} else {
+								stbData["title"] = patchData["title"];
+
+								const stbTileTitleElem = document.getElementById(`js-stb-tile-title-${stbId}`);
+								stbTileTitleElem.innerText = stbData["title"];
+
+								const stbOverlayTitleElem = document.getElementById("js-stb-overlay-title");
+								stbOverlayTitleElem.innerText = stbData["title"];
+
+								closeAction();
+							}
+						});
+						event.preventDefault();
+					};
+
+				}
+
+				return _inner;
 			}
 
 			function genPublicToggleHandler(username, stbId, stbData) {
@@ -330,7 +436,7 @@
 					})
 				}
 
-				return _inner
+				return _inner;
 			}
 		</script>
 	</body>

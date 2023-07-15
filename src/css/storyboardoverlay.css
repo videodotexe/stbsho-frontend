@@ -23,6 +23,42 @@
     padding: 2rem;
 }
 
+.overlay-header {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.33rem;
+}
+
+.dialog-overlay {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 2rem;
+    min-width: 30rem;
+}
+
+.dialog-overlay .global-text-input {
+	box-sizing: border-box;
+    width: 100%;
+}
+
+.dialog-overlay > div:not(:first-child) {
+    padding-top: 1rem;
+}
+
+.dialog-overlay .dialog-buttons {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 1rem;
+    gap: 1rem;
+}
+
+.dialog-overlay .dialog-buttons input {
+    width: 8rem;
+    height: 2.3rem;
+    justify-content: center;
+}
+
 #options-panel {
     display: flex;
     flex-direction: column;
@@ -30,12 +66,6 @@
     overflow-y: scroll;
 
     padding-top: 0px;
-}
-
-.storyboard-overlay>.overlay-right>div>.header {
-    display: flex;
-    justify-content: space-between;
-    gap: 1.33rem;
 }
 
 /* All options (the main versions selector too) are option blocks */
